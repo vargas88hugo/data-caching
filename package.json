@@ -4,7 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "server": "nodemon server.js"
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefilx client",
+    "dev": "concurrenty \"node server.js\" \"node run clint\""
   },
   "author": "",
   "license": "ISC",
