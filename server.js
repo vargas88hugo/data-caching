@@ -1,10 +1,13 @@
 const express = require('express');
+
 const connectDB = require('./config/db');
 const { PORT } = require('./config/keys');
 
 const app = express();
 
 connectDB();
+
+app.use(express.json({ extended: false }));
 
 app.use('/auth', require('./routes/auth'));
 app.use('/blog', require('./routes/blog'));
