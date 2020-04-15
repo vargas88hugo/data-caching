@@ -4,6 +4,20 @@ const { Strategy } = require('passport-google-oauth20');
 const { idGoogle, secretGoogle } = require('../config/keys');
 const User = require('../models/User');
 
+/**
+ * In this step we serialize the mongo user
+ * to a token for setting a cookie
+ */
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id).then((user) => {
+    done(null, user);
+  });
+});
+
 passport.use(
   new Strategy(
     {

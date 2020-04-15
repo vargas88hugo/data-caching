@@ -11,4 +11,4 @@ const BlogSchema = new Schema({
   _user: { type: Schema.Types.ObjectId, ref: 'user ' },
 });
 
-mongoose.model('blog', BlogSchema);
+module.exports = Blog = mongoose.model('blog', BlogSchema);
