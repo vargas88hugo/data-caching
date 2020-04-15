@@ -7,7 +7,7 @@ const User = require('../models/User');
 passport.use(
   new Strategy(
     {
-      callbackURL: '/google/callback',
+      callbackURL: '/auth/google/callback',
       clientID: idGoogle,
       clientSecret: secretGoogle,
       proxy: true,

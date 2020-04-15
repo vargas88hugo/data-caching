@@ -13,6 +13,23 @@ const Header = () => {
       </nav>
     </Fragment>
   );
+
+  const authLinks = (
+    <ul>
+      <Link to="/auth/google">Login with Google</Link>
+    </ul>
+  );
+
+  const guestLinks = (
+    <ul>
+      <li>
+        <Link to="/blogs">My Blogs</Link>
+      </li>
+      <li>
+        <Link to="/auth/logout">Logout</Link>
+      </li>
+    </ul>
+  );
 };
 
 export default Header;
