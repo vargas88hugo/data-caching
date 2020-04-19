@@ -1,45 +1,46 @@
 const passport = require('passport');
 const { Strategy } = require('passport-google-oauth20');
 
-const { idGoogle, secretGoogle } = require('../config/keys');
 const User = require('../models/User');
 
-/**
- * In this step we serialize the mongo user
- * to a token for setting a cookie
- */
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
+// passport.serializeUser((user, done) => {
+//   done(null, user.id);
+// });
 
-passport.deserializeUser((id, done) => {
-  User.findById(id).then((user) => {
-    done(null, user);
-  });
-});
+// passport.deserializeUser((id, done) => {
+//   User.findById(id).then((user) => {
+//     done(null, user);
+//     console.log('hi');
+//   });
+// });
 
-passport.use(
-  new Strategy(
-    {
-      callbackURL: '/auth/google/callback',
-      clientID: idGoogle,
-      clientSecret: secretGoogle,
-      proxy: true,
-    },
-    async (accessToken, refreshToken, profile, done) => {
-      try {
-        const user = await User.findOne({ googleId: profile.id });
-        if (user) {
-          return done(null, user);
-        }
-        const newUser = await new User({
+new User({ googleId: '12345' });
+
+const passportInit = () => {
+  passport.use(
+    new Strategy(
+      {
+        clientID: process.env.GOOGLE_ID,
+        clientSecret: process.env.GOOGLE_SECRET,
+        callbackURL: '/auth/google/callback',
+      },
+      async (accessToken, refreshToken, profile, done) => {
+        const user = await User.findOne({
           googleId: profile.id,
-          displayName: profile.displayName,
-        }).save();
-        done(null, newUser);
-      } catch (err) {
-        done(err, null);
+        });
+
+        if (user) {
+          done(null, user);
+        } else {
+          const newUser = new User({ googleId: profile.id });
+
+          await newUser.save();
+
+          done(null, user);
+        }
       }
-    }
-  )
-);
+    )
+  );
+};
+
+module.exports = passportInit;
