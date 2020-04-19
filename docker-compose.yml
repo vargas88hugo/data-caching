@@ -1,0 +1,10 @@
+version: '3'
+services:
+  web:
+    image: caching-server
+    build: ./server
+    ports:
+      - '5000:5000'
+    volumes:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules
