@@ -3,16 +3,15 @@ const { Strategy } = require('passport-google-oauth20');
 
 const User = require('../models/User');
 
-// passport.serializeUser((user, done) => {
-//   done(null, user.id);
-// });
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
 
-// passport.deserializeUser((id, done) => {
-//   User.findById(id).then((user) => {
-//     done(null, user);
-//     console.log('hi');
-//   });
-// });
+passport.deserializeUser((id, done) => {
+  User.findById(id).then((user) => {
+    done(null, user);
+  });
+});
 
 new User({ googleId: '12345' });
 
