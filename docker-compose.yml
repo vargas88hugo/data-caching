@@ -1,6 +1,6 @@
 version: '3'
 services:
-  server:
+  api:
     build: './server'
     volumes:
       - './server:/usr/src/app'
@@ -34,3 +34,10 @@ services:
       - '/usr/src/app/node_modules'
       - './client:/usr/src/app'
     tty: true
+  nginx:
+    restart: 'always'
+    build:
+      dockerfile: 'Dockerfile.dev'
+      context: './nginx'
+    ports:
+      - '4000:80'

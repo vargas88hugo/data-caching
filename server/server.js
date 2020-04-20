@@ -20,9 +20,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/api/blogs', require('./routes/api/blogs'));
+app.use('/blogs', require('./routes/api/blogs'));
 app.use('/auth', require('./routes/auth'));
-app.use('/api', require('./routes/api/auth'));
+app.use('/', require('./routes/api/auth'));
 
 app.listen(process.env.PORT, () =>
   console.log(`Server started on port ${process.env.PORT}`)

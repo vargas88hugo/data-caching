@@ -8,7 +8,11 @@ import BlogNew from './components/blogs/BlogNew';
 import Dashboard from './components/Dashboard';
 import { fetchUser } from './actions/auth';
 
-const App = () => {
+const App = ({ fetchUser }) => {
+  useEffect(() => {
+    fetchUser();
+  });
+
   return (
     <Fragment>
       <Header />
