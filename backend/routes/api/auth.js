@@ -9,7 +9,7 @@ router.get('/current_user', (req, res) => {
 
 router.get('/logout', (req, res) => {
   req.logout();
-  res.send(req.user);
+  res.redirect('http://localhost:5000/api/current_user');
 });
 
 module.exports = router;

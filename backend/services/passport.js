@@ -22,21 +22,20 @@ const passportInit = () => {
         clientID: process.env.GOOGLE_ID,
         clientSecret: process.env.GOOGLE_SECRET,
         callbackURL: '/auth/google/callback',
+        proxy: true,
       },
-      async (accessToken, refreshToken, profile, done) => {
-        const user = await User.findOne({
-          googleId: profile.id,
+      (accessToken, refreshToken, profile, done) => {
+        User.findOne({ googleId: profile.id }).then((existingUser) => {
+          if (existingUser) {
+            done(null, existingUser);
+          } else {
+            new User({
+              googleId: profile.id,
+            })
+              .save()
+              .then((user) => done(null, user));
+          }
         });
-
-        if (user) {
-          done(null, user);
-        } else {
-          const newUser = new User({ googleId: profile.id });
-
-          await newUser.save();
-
-          done(null, user);
-        }
       }
     )
   );

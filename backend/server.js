@@ -20,7 +20,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/blogs', require('./routes/api/blogs'));
+app.use('/api/blogs', require('./routes/api/blogs'));
 app.use('/auth', require('./routes/auth'));
 app.use('/api', require('./routes/api/auth'));
 
