@@ -1,10 +1,14 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-const Header = () => {
+const Header = (props) => {
+  console.log(props);
+
   const authLinks = (
     <ul>
-      <Link to="/auth/google" className="right">
+      <Link to="http://localhost:5000/api/auth/google" className="right">
         Login with Google
       </Link>
     </ul>
@@ -34,4 +38,12 @@ const Header = () => {
   );
 };
 
-export default Header;
+Header.propTypes = {
+  auth: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps)(Header);

@@ -1,9 +1,9 @@
 version: '3'
 services:
-  api:
-    build: './server'
+  backend:
+    build: './backend'
     volumes:
-      - './server:/usr/src/app'
+      - './backend:/usr/src/app'
       - '/usr/src/app/node_modules'
     environment:
       - 'MONGO_URL=mongodb://mongo/caching'
@@ -24,20 +24,13 @@ services:
       - '1234:1234'
     environment:
       - 'HOST=0.0.0.0'
-  client:
+  frontend:
     build:
-      context: './client'
+      context: './frontend'
       dockerfile: 'Dockerfile.dev'
     ports:
       - '3000:3000'
     volumes:
       - '/usr/src/app/node_modules'
-      - './client:/usr/src/app'
+      - './frontend:/usr/src/app'
     tty: true
-  nginx:
-    restart: 'always'
-    build:
-      dockerfile: 'Dockerfile.dev'
-      context: './nginx'
-    ports:
-      - '4000:80'
