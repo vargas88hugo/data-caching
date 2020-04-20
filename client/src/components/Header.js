@@ -6,7 +6,7 @@ const Header = () => {
     <Fragment>
       <nav>
         <div className="nav-wrapper grey darken-1">
-          <Link className="left brand-logo" style={{ margin: '0 10px' }}>
+          <Link to="/" className="left brand-logo" style={{ margin: '0 10px' }}>
             Logo
           </Link>
         </div>
