@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
   res.send('Home');
 });
 app.use('/api/auth', require('./routes/api/auth'));
-app.use('/api/user', require('./routes/api/user'));
+app.use('/api/user', require('./routes/api/users'));
 app.use('/api/blogs', require('./routes/api/blogs'));
 
 app.listen(process.env.PORT, () =>
