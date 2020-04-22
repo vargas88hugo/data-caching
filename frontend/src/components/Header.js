@@ -8,9 +8,12 @@ const Header = (props) => {
 
   const authLinks = (
     <ul>
-      <Link to="http://localhost:5000/api/auth/google" className="right">
+      <li>
+        <a href="/auth/google">Login with Google</a>
+      </li>
+      {/* <Link to="/auth/google" className="right">
         Login with Google
-      </Link>
+      </Link> */}
     </ul>
   );
 
