@@ -1,13 +1,14 @@
 version: '3'
 services:
   backend:
-    build: '../../backend'
+    build: './backend'
     volumes:
-      - '../../backend:/usr/src/app'
+      - './backend:/usr/src/app'
       - '/usr/src/app/node_modules'
     environment:
       - 'MONGO_URL=mongodb://mongo/caching'
       - 'PORT=5000'
+      - 'JWT=NO_SECRET_ENJOY'
     ports:
       - '5000:5000'
     depends_on:
