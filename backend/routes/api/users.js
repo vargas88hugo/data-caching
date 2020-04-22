@@ -51,7 +51,7 @@ router.post(
 
       const payload = {
         user: {
-          id: user._id,
+          _id: user._id,
         },
       };
 
@@ -68,7 +68,7 @@ router.post(
         }
       );
     } catch (error) {
-      console.error(err.message);
+      console.error(error.message);
       res.status(500).send('Server Error');
     }
   }

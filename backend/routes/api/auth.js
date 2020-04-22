@@ -10,12 +10,13 @@ const router = express.Router();
 
 /**
  * @route     GET api/auth
- * @desc      Ger user by token
- * @access    Public
+ * @desc      Get user by token
+ * @access    Private
  */
 router.get('/', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select('-password');
+    console.log(req.user.id);
+    const user = await User.findById(req.user._id).select('-password');
 
     res.json(user);
   } catch (error) {
@@ -61,7 +62,7 @@ router.post(
 
       const payload = {
         user: {
-          id: user._id,
+          _id: user._id,
         },
       };
 
