@@ -1,6 +1,7 @@
 const express = require('express');
 const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const User = require('../../models/User');
 
@@ -48,8 +49,28 @@ router.post(
 
       await user.save();
 
-      res.send('User registered');
-    } catch (error) {}
+      const payload = {
+        user: {
+          id: user._id,
+        },
+      };
+
+      jwt.sign(
+        payload,
+        process.env.JWT,
+        { expiresIn: 360000 },
+        (error, token) => {
+          if (error) {
+            console.log('gola');
+            throw error;
+          }
+          res.json({ token });
+        }
+      );
+    } catch (error) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
   }
 );
 
