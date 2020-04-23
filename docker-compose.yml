@@ -9,6 +9,7 @@ services:
       - 'MONGO_URL=mongodb://mongo/caching'
       - 'PORT=5000'
       - 'JWT=NO_SECRET_ENJOY'
+      - 'REDIS_URL=redis://redis'
     ports:
       - '5000:5000'
     depends_on:
@@ -25,3 +26,7 @@ services:
       - 'HOST=0.0.0.0'
     depends_on:
       - 'mongo'
+  redis:
+    image: 'redis'
+    ports:
+      - '6379:6379'
