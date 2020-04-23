@@ -15,7 +15,6 @@ const router = express.Router();
  */
 router.get('/', auth, async (req, res) => {
   try {
-    console.log(req.user.id);
     const user = await User.findById(req.user._id).select('-password');
 
     res.json(user);
@@ -72,7 +71,6 @@ router.post(
         { expiresIn: 360000 },
         (error, token) => {
           if (error) {
-            console.log('gola');
             throw error;
           }
           res.json({ token });

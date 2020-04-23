@@ -1,12 +1,12 @@
 const express = require('express');
 
 const connectDB = require('./config/db');
-const cache = require('./services/cache');
+const { cacheRedis } = require('./services/cache');
 
 const app = express();
 
 connectDB();
-cache();
+cacheRedis();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

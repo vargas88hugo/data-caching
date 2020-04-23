@@ -61,7 +61,6 @@ router.post(
         { expiresIn: 360000 },
         (error, token) => {
           if (error) {
-            console.log('gola');
             throw error;
           }
           res.json({ token });

@@ -1,5 +1,6 @@
 const express = require('express');
 const { check, validationResult } = require('express-validator');
+const { clearHash } = require('../../services/cache');
 
 const auth = require('../../middlewares/auth');
 const Blog = require('../../models/Blog');
@@ -84,9 +85,10 @@ router.get('/:id', auth, async (req, res) => {
  */
 router.get('/', auth, async (req, res) => {
   try {
-    const blogs = await Blog.find({ _user: req.user._id });
+    const blogs = await Blog.find({ _user: req.user._id }).cache({
+      key: req.user._id,
+    });
 
-    console.log('SERVING FROM MONGO');
     res.json(blogs);
   } catch (error) {
     console.error(error.message);
