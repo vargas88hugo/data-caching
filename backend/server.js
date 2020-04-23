@@ -1,10 +1,12 @@
 const express = require('express');
 
 const connectDB = require('./config/db');
+const cache = require('./services/cache');
 
 const app = express();
 
 connectDB();
+cache();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
