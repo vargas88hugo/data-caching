@@ -1,6 +1,6 @@
 const express = require('express');
 const { check, validationResult } = require('express-validator');
-const { clearHash } = require('../../services/cache');
+const cleanCache = require('../../middlewares/cleanCache');
 
 const auth = require('../../middlewares/auth');
 const Blog = require('../../models/Blog');
@@ -83,7 +83,7 @@ router.get('/:id', auth, async (req, res) => {
  * @desc      Get all blogs of the current user
  * @access    Private
  */
-router.get('/', auth, async (req, res) => {
+router.get('/', auth, cleanCache, async (req, res) => {
   try {
     const blogs = await Blog.find({ _user: req.user._id }).cache({
       key: req.user._id,
