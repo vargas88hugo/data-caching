@@ -84,26 +84,10 @@ router.get('/:id', auth, async (req, res) => {
  */
 router.get('/', auth, async (req, res) => {
   try {
-    const redis = require('redis');
-    const client = redis.createClient(process.env.REDIS_URL);
-    const util = require('util');
-    client.get = util.promisify(client.get);
-
-    // We check if there is the  request data in redis
-    const cachedBlogs = await client.get(req.user._id);
-
-    console.log(cachedBlogs);
-
-    if (cachedBlogs) {
-      console.log('SERVING FROM CACHE');
-      return res.send(JSON.parse(cachedBlogs));
-    }
-
     const blogs = await Blog.find({ _user: req.user._id });
 
     console.log('SERVING FROM MONGO');
     res.json(blogs);
-    client.set(req.user._id, JSON.stringify(blogs));
   } catch (error) {
     console.error(error.message);
 
