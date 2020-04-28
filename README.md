@@ -20,7 +20,7 @@ A simple implementation of a cache with Redis in a nodejs server connected with 
 ## Instalation
 Clone into your project:
 ```bash
-git clone https://github.com/Osedea/nodock.git
+git clone https://github.com/vargas88hugo/data-caching
 ```
 
 <a name="Usage"></a>
