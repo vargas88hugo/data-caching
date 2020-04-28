@@ -4,7 +4,7 @@
   <img src="https://github.com/vargas88hugo/data-caching/blob/master/public/header.png" />
 </div>
 
-A simple implementation of a cache with Redis in a nodejs server connected with MongoDB. Redis uses you RAM to store data which is very fast, however if you turn off your server the values are gone, unless you enable Redis persistence. In this case I didn't configure MongoDB to persistent data and it's implemented with a MongoDB administrator.
+A simple implementation of a cache with Redis in a nodejs server connected to MongoDB. Redis uses you RAM to store data which is very fast, however if you turn off your server the values are gone, unless you enable Redis persistence. In this case I didn't configure MongoDB to persistent data and it's implemented with a MongoDB administrator.
 
 ## Contents
 - [Endpoints](#Endpoints)
